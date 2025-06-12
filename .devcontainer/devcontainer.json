@@ -1,0 +1,19 @@
+{
+  "name": "paper-template",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21",
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "none",
+      "installMaven": "false",
+      "installGradle": "true",
+      "gradleVersion": "8.9"
+    }
+  },
+  "forwardPorts": [25565],
+  "portsAttributes": {
+    "25565": {
+      "label": "Paper Development Server",
+      "onAutoForward": "silent"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+welcome-message: "<gradient:#e3a3ce:#f291d8:#e3a3ce>Welcome to the server, <name>!</gradient><newline>You're currently in the world <color:#8444e3><world></color>. Please enjoy your stay!"
+commands:
+  general:
+    no-permission: "<red>You do not have permission to use this command.</red>"
+    player-offline: "<red>That player is offline. Please try with another one or wait for them to come online.</red>"
+    player-required: "<red>You must specify a player.</red>"
+  main:
+    default: "<color:#ff4d73>ℹ</color> Running <color:#ff8791>Fundamentals</color> version <color:#ff8791><version></color> made by <color:#ff8791><authors></color>."
+    reload:
+      success: "<green>Configuration and messages have been reloaded."
+      fail: "<red>Reload failed. Please check the console for errors.</red>"
+  broadcast:
+    blank: "<red>Cannot broadcast an empty message.</red>"
+    prefix: "<color:#ff4d73><b>ℹ</b> Alert</color> "
+  top:
+    self: "<green>Teleported to the highest point of your current location.</green>"
+    teleported-by-admin: "<green>You have been teleported to the highest point of your current location by an administrator.</green>"
+    other: "<green>Teleported <target> to the highest point of their current location.</green>"
+  spawn:
+    no-spawn: "<red>There is no spawn point set on this server.</red>"
+    spawn-invalid: "<red>The spawn point is invalid. Please contact an administrator.</red>"
+    spawn-set: "<green>Spawn point set successfully.</green>"
+    spawn-set-fail: "<red>Failed to set the spawn point. Please check the console for errors.</red>"
+    self: "<green>Teleported to the server spawn.</green>"
+    teleported-by-admin: "<green>You have been teleported to the server spawn by an administrator.</green>"
+    other: "<green>Teleported <target> to the server spawn.</green>"
+  heal:
+    self: "<green>Your health has been restored.</green>"
+    healed-by-admin: "<green>You've been healed by an administrator.</green>"
+    other: "<green>Healed <target>.</green>"
+  feed:
+    self: "<green>You suddenly stop feeling hungry. Your food level has been restored.</green>"
+    fed-by-admin: "<green>Your food level has been restored by an administrator.</green>"
+    other: "<green>Restored food level for <target>.</green>"
+  ping:
+    self: "<yellow>Your ping is currently around <ping_color><ping> ms<reset><yellow>.</yellow>"
+    other: "<yellow>The ping of <aqua><player></aqua> is around <ping_color><ping> ms<reset><yellow>.</yellow>"
+  discord:
+    set:
+      invalid-invite: "<red>That's not a valid Discord invite link!</red>"
+      success: "<green>Discord invite link set.</green>"
+    no-invite: "<red>Sorry, we don't have a Discord server yet!</red>"
+    invite: "<gold><bold><click:open_url:'<invite>'>Click here</click></bold></gold> to join our <color:#5865f2>Discord</color> server!"
+  website:
+    set:
+      invalid-url: "<red>That's not a valid URL!</red>"
+      success: "<green>Website URL set.</green>"
+    no-website: "<red>Sorry, we don't have a website yet!</red>"
+    link: "<gold><bold><click:open_url:'<url>'>Click here</click></bold></gold> to open our <color:#f3b4f6>website</color>!"

@@ -1,0 +1,15 @@
+config:
+  spawn: ""
+  join:
+    teleport-to-spawn: false
+    show-welcome-message: true
+  broadcast:
+    prefer-legacy-color-system: true
+  ping:
+    good: "<color:#21ff59>"
+    average: "<color:#fffc63>"
+    bad: "<color:#ff403d>"
+  social-media:
+    discord: ""
+    website: ""
+    store: ""
