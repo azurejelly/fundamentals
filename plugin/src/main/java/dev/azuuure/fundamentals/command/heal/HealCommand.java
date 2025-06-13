@@ -1,5 +1,6 @@
 package dev.azuuure.fundamentals.command.heal;
 
+
 import dev.azuuure.fundamentals.Fundamentals;
 import dev.triumphteam.cmd.bukkit.annotation.Permission;
 import dev.triumphteam.cmd.core.BaseCommand;

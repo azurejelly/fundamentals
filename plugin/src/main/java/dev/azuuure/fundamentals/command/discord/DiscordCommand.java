@@ -10,6 +10,9 @@ import dev.triumphteam.cmd.core.annotation.SubCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 
+import java.io.IOException;
+import java.util.logging.Level;
+
 @Command(value = "discord", alias = { "fdiscord" })
 public class DiscordCommand extends BaseCommand {
 
@@ -43,8 +46,14 @@ public class DiscordCommand extends BaseCommand {
             return;
         }
 
-        plugin.getConfig().set("config.social-media.discord", invite);
-        plugin.saveConfig();
+        try {
+            plugin.getConfig().set("config.social-media.discord", invite);
+            plugin.getConfig().save();
+        } catch (IOException e) {
+            sender.sendMessage(plugin.getMessages().getComponent("commands.discord.set.save-fail"));
+            plugin.getLogger().log(Level.SEVERE, "Failed to save Discord invite", e);
+            return;
+        }
 
         sender.sendMessage(
                 plugin.getMessages().getComponent("commands.discord.set.success",

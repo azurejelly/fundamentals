@@ -1,9 +1,10 @@
 package dev.azuuure.fundamentals.loader.command;
 
 import dev.azuuure.fundamentals.Fundamentals;
-import dev.azuuure.fundamentals.api.Loader;
+import dev.azuuure.fundamentals.api.loader.Loader;
 import dev.azuuure.fundamentals.command.FundamentalsCommand;
 import dev.azuuure.fundamentals.command.broadcast.BroadcastCommand;
+import dev.azuuure.fundamentals.command.clear.ClearCommand;
 import dev.azuuure.fundamentals.command.discord.DiscordCommand;
 import dev.azuuure.fundamentals.command.feed.FeedCommand;
 import dev.azuuure.fundamentals.command.heal.HealCommand;
@@ -31,6 +32,7 @@ public class CommandLoader implements Loader {
     @Override
     public void load() {
         commandManager.registerCommand(new BroadcastCommand(plugin));
+        commandManager.registerCommand(new ClearCommand(plugin));
         commandManager.registerCommand(new DiscordCommand(plugin));
         commandManager.registerCommand(new FeedCommand(plugin));
         commandManager.registerCommand(new HealCommand(plugin));

@@ -1,8 +1,20 @@
 config:
   spawn: ""
+  storage:
+    type: "YAML"
+    mongodb:
+      uri: ""
+      hostname: "127.0.0.1"
+      port: 27017
+      database: "fundamentals"
+      username: ""
+      password: ""
   join:
     teleport-to-spawn: false
     show-welcome-message: true
+    custom-join-message: true
+  quit:
+    custom-quit-message: true
   broadcast:
     prefer-legacy-color-system: true
   ping:

@@ -1,7 +1,7 @@
 package dev.azuuure.fundamentals.loader.config;
 
 import dev.azuuure.fundamentals.Fundamentals;
-import dev.azuuure.fundamentals.api.Loader;
+import dev.azuuure.fundamentals.api.loader.Loader;
 import dev.azuuure.fundamentals.api.file.YamlFile;
 import org.bukkit.configuration.InvalidConfigurationException;
 

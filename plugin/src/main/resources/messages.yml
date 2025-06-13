@@ -1,9 +1,19 @@
 welcome-message: "<gradient:#e3a3ce:#f291d8:#e3a3ce>Welcome to the server, <name>!</gradient><newline>You're currently in the world <color:#8444e3><world></color>. Please enjoy your stay!"
+alerts:
+  player-join: "<color:#ff4d73><b>ℹ</b></color> <color:#ff8791><name></color> has joined the server."
+  player-leave: "<color:#ff4d73><b>ℹ</b></color> <color:#ff8791><name></color> has left the server."
 commands:
   general:
     no-permission: "<red>You do not have permission to use this command.</red>"
+    player-only: "<red>This command can only be used by players.</red>"
+    console-only: "<red>This command can only be used from the console.</red>"
+    must-provide-player: "<red>You must provide a player name.</red>"
     player-offline: "<red>That player is offline. Please try with another one or wait for them to come online.</red>"
     player-required: "<red>You must specify a player.</red>"
+  clear:
+    success: "<green>Your inventory has been cleared.</green>"
+    success-other: "<green>The inventory of <target> has been cleared.</green>"
+    cleared-by-admin: "<green>Your inventory has been cleared by an administrator.</green>"
   main:
     default: "<color:#ff4d73>ℹ</color> Running <color:#ff8791>Fundamentals</color> version <color:#ff8791><version></color> made by <color:#ff8791><authors></color>."
     reload:
@@ -38,12 +48,14 @@ commands:
   discord:
     set:
       invalid-invite: "<red>That's not a valid Discord invite link!</red>"
+      save-fail: "<red>Saving Discord invite link failed. Please check the console for errors.</red>"
       success: "<green>Discord invite link set.</green>"
     no-invite: "<red>Sorry, we don't have a Discord server yet!</red>"
     invite: "<gold><bold><click:open_url:'<invite>'>Click here</click></bold></gold> to join our <color:#5865f2>Discord</color> server!"
   website:
     set:
       invalid-url: "<red>That's not a valid URL!</red>"
+      save-fail: "<red>Saving website URL failed. Please check the console for errors.</red>"
       success: "<green>Website URL set.</green>"
     no-website: "<red>Sorry, we don't have a website yet!</red>"
     link: "<gold><bold><click:open_url:'<url>'>Click here</click></bold></gold> to open our <color:#f3b4f6>website</color>!"

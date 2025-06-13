@@ -9,7 +9,6 @@ import dev.triumphteam.cmd.core.annotation.SubCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.entity.Player;
 
 import java.io.IOException;
 import java.util.logging.Level;

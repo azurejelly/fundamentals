@@ -1,4 +1,4 @@
-package dev.azuuure.fundamentals.api;
+package dev.azuuure.fundamentals.api.loader;
 
 public interface Loader {
 

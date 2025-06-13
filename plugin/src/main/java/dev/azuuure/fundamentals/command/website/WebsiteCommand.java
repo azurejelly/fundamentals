@@ -10,6 +10,9 @@ import dev.triumphteam.cmd.core.annotation.SubCommand;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
 
+import java.io.IOException;
+import java.util.logging.Level;
+
 @Command(value = "website", alias = { "fwebsite" })
 @Permission("fundamentals.command.website")
 public class WebsiteCommand extends BaseCommand {
@@ -45,8 +48,14 @@ public class WebsiteCommand extends BaseCommand {
             return;
         }
 
-        plugin.getConfig().set("config.social-media.website", invite);
-        plugin.saveConfig();
+        try {
+            plugin.getConfig().set("config.social-media.website", invite);
+            plugin.getConfig().save();
+        } catch (IOException e) {
+            sender.sendMessage(plugin.getMessages().getComponent("commands.website.set.save-fail"));
+            plugin.getLogger().log(Level.SEVERE, "Failed to save website URL", e);
+            return;
+        }
 
         sender.sendMessage(
                 plugin.getMessages().getComponent(

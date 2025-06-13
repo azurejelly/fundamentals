@@ -1,10 +1,12 @@
 package dev.azuuure.fundamentals.listener;
 
 import dev.azuuure.fundamentals.Fundamentals;
+import dev.azuuure.fundamentals.api.user.User;
 import dev.azuuure.fundamentals.api.util.LocationUtils;
 import io.github.miniplaceholders.api.MiniPlaceholders;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,6 +25,22 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        User user = plugin.getStorage().getImplementation().loadUser(player.getUniqueId());
+
+        if (user != null) {
+            user.refresh();
+        }
+
+        if (plugin.getConfig().getBoolean("config.join.custom-join-message", true)) {
+            Server server = plugin.getServer();
+            event.joinMessage(
+                    plugin.getMessages().getComponent("alerts.player-join",
+                            Placeholder.unparsed("name", player.getName()),
+                            Placeholder.unparsed("online_players", String.valueOf(server.getOnlinePlayers().size())),
+                            Placeholder.unparsed("max_players", String.valueOf(server.getMaxPlayers()))
+                    )
+            );
+        }
 
         if (plugin.getConfig().getBoolean("config.join.teleport-to-spawn", false)) {
             try {
