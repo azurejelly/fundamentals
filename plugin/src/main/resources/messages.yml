@@ -14,6 +14,8 @@ commands:
     success: "<green>Your inventory has been cleared.</green>"
     success-other: "<green>The inventory of <target> has been cleared.</green>"
     cleared-by-admin: "<green>Your inventory has been cleared by an administrator.</green>"
+  workbench:
+    other: "<green>Opened a crafting table for <target>.</green>"
   main:
     default: "<color:#ff4d73>ℹ</color> Running <color:#ff8791>Fundamentals</color> version <color:#ff8791><version></color> made by <color:#ff8791><authors></color>."
     reload:

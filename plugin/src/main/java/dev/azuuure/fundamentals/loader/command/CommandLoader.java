@@ -12,6 +12,7 @@ import dev.azuuure.fundamentals.command.ping.PingCommand;
 import dev.azuuure.fundamentals.command.spawn.SpawnCommand;
 import dev.azuuure.fundamentals.command.top.TopCommand;
 import dev.azuuure.fundamentals.command.website.WebsiteCommand;
+import dev.azuuure.fundamentals.command.workbench.WorkbenchCommand;
 import dev.triumphteam.cmd.bukkit.BukkitCommandManager;
 import dev.triumphteam.cmd.bukkit.message.BukkitMessageKey;
 import dev.triumphteam.cmd.core.message.MessageKey;
@@ -40,6 +41,7 @@ public class CommandLoader implements Loader {
         commandManager.registerCommand(new SpawnCommand(plugin));
         commandManager.registerCommand(new TopCommand(plugin));
         commandManager.registerCommand(new WebsiteCommand(plugin));
+        commandManager.registerCommand(new WorkbenchCommand(plugin));
         commandManager.registerCommand(new FundamentalsCommand(plugin));
     }
 
