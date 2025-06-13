@@ -25,7 +25,7 @@ public class FundamentalsCommand extends BaseCommand {
     @Default
     @Permission("fundamentals.command.main")
     @SuppressWarnings("UnstableApiUsage")
-    public void console(CommandSender sender) {
+    public void execute(CommandSender sender) {
         sender.sendMessage(
                 plugin.getMessages().getComponent(
                         "commands.main.default",
