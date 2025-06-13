@@ -8,6 +8,7 @@ import dev.triumphteam.cmd.core.annotation.Default;
 import dev.triumphteam.cmd.core.annotation.Optional;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Command(value = "top", alias = { "ftop", "fhighest", "highest" })
@@ -21,19 +22,38 @@ public class TopCommand extends BaseCommand {
 
     @Default
     @Permission("fundamentals.command.top")
-    public void execute(Player player, @Optional Player target) {
-        if (target != null) {
-            if (!player.hasPermission("fundamentals.command.top.other")) {
-                player.sendMessage(plugin.getMessages().getComponent("commands.general.no-permission"));
+    public void execute(CommandSender sender, @Optional Player target) {
+        if (sender instanceof Player player) {
+            if (target == null) {
+                target = player;
+            } else {
+                if (!player.hasPermission("fundamentals.command.top.other")) {
+                    player.sendMessage(plugin.getMessages().getComponent("commands.general.no-permission"));
+                    return;
+                }
+            }
+
+            if (target.getUniqueId().equals(player.getUniqueId())) {
+                player.sendMessage(plugin.getMessages().getComponent("commands.top.self"));
+            }
+        } else {
+            if (target == null) {
+                sender.sendMessage(plugin.getMessages().getComponent("commands.general.must-provide-player"));
                 return;
             }
 
-            if (!target.isOnline()) {
-                player.sendMessage(plugin.getMessages().getComponent("commands.general.offline"));
-                return;
-            }
-        } else {
-            target = player;
+            target.sendMessage(
+                    plugin.getMessages().getComponent(
+                            "commands.top.teleported-by-admin",
+                            Placeholder.unparsed("administrator", sender.getName())
+                    )
+            );
+
+            sender.sendMessage(
+                    plugin.getMessages().getComponent(
+                            "commands.top.other", Placeholder.unparsed("target", target.getName())
+                    )
+            );
         }
 
         // Get the highest block location at the target player's current position
@@ -49,23 +69,5 @@ public class TopCommand extends BaseCommand {
 
         // Teleport the target player to the highest point
         target.teleport(highestPoint);
-
-        if (target.getUniqueId().equals(player.getUniqueId())) {
-            player.sendMessage(plugin.getMessages().getComponent("commands.top.self"));
-            return;
-        }
-
-        target.sendMessage(
-                plugin.getMessages().getComponent(
-                        "commands.top.teleported-by-admin",
-                        Placeholder.unparsed("administrator", player.getName())
-                )
-        );
-
-        player.sendMessage(
-                plugin.getMessages().getComponent(
-                        "commands.top.other", Placeholder.unparsed("target", target.getName())
-                )
-        );
     }
 }

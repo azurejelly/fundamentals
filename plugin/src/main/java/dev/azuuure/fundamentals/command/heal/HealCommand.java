@@ -8,6 +8,7 @@ import dev.triumphteam.cmd.core.annotation.Command;
 import dev.triumphteam.cmd.core.annotation.Default;
 import dev.triumphteam.cmd.core.annotation.Optional;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Command(value = "heal", alias = { "fheal" })
@@ -21,38 +22,41 @@ public class HealCommand extends BaseCommand {
 
     @Default
     @Permission("fundamentals.command.heal")
-    public void execute(Player player, @Optional Player target) {
-        if (target != null) {
-            if (!player.hasPermission("fundamentals.command.heal.other")) {
-                player.sendMessage(plugin.getMessages().getComponent("commands.general.no-permission"));
-                return;
+    public void execute(CommandSender sender, @Optional Player target) {
+        if (sender instanceof Player player) {
+            if (target == null) {
+                target = player;
+            } else {
+                if (!player.hasPermission("fundamentals.command.heal.other")) {
+                    player.sendMessage(plugin.getMessages().getComponent("commands.general.no-permission"));
+                    return;
+                }
             }
 
-            if (!target.isOnline()) {
-                player.sendMessage(plugin.getMessages().getComponent("commands.general.offline"));
+            if (target.getUniqueId().equals(player.getUniqueId())) {
+                player.sendMessage(plugin.getMessages().getComponent("commands.heal.self"));
                 return;
             }
         } else {
-            target = player;
+            if (target == null) {
+                sender.sendMessage(plugin.getMessages().getComponent("commands.general.must-provide-player"));
+                return;
+            }
+
+            target.sendMessage(
+                    plugin.getMessages().getComponent(
+                            "commands.heal.healed-by-admin",
+                            Placeholder.unparsed("administrator", sender.getName())
+                    )
+            );
+
+            sender.sendMessage(
+                    plugin.getMessages().getComponent(
+                            "commands.heal.other", Placeholder.unparsed("target", target.getName())
+                    )
+            );
         }
 
         target.setHealth(target.getMaxHealth());
-
-        if (target.getUniqueId().equals(player.getUniqueId())) {
-            player.sendMessage(plugin.getMessages().getComponent("commands.heal.self"));
-            return;
-        }
-
-        target.sendMessage(
-                plugin.getMessages().getComponent(
-                        "commands.heal.healed-by-admin", Placeholder.unparsed("administrator", player.getName())
-                )
-        );
-
-        player.sendMessage(
-                plugin.getMessages().getComponent(
-                        "commands.heal.other", Placeholder.unparsed("target", target.getName())
-                )
-        );
     }
 }
