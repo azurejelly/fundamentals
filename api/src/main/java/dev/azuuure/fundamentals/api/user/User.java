@@ -17,6 +17,7 @@ public final class User {
     private String lastAddress;
     private final long firstSeen;
     private long lastSeen;
+    private boolean allowsTeleport;
 
     public User() {
         this.uuid = UUID.randomUUID();
@@ -25,6 +26,7 @@ public final class User {
         this.lastAddress = null;
         this.firstSeen = System.currentTimeMillis();
         this.lastSeen = System.currentTimeMillis();
+        this.allowsTeleport = true;
     }
 
     public User(Player player) {
@@ -34,6 +36,7 @@ public final class User {
         this.lastAddress = player.getAddress() != null ? player.getAddress().getHostString() : "n/a";
         this.firstSeen = System.currentTimeMillis();
         this.lastSeen = System.currentTimeMillis();
+        this.allowsTeleport = true;
     }
 
     public User(UUID uuid) {
@@ -43,6 +46,7 @@ public final class User {
         this.lastAddress = null;
         this.firstSeen = System.currentTimeMillis();
         this.lastSeen = System.currentTimeMillis();
+        this.allowsTeleport = true;
     }
 
     public User(
@@ -51,7 +55,8 @@ public final class User {
             Location lastKnownLocation,
             String lastAddress,
             long firstSeen,
-            long lastSeen
+            long lastSeen,
+            boolean allowsTeleport
     ) {
         this.uuid = uuid;
         this.lastKnownName = lastKnownName;
@@ -59,6 +64,7 @@ public final class User {
         this.lastAddress = lastAddress;
         this.firstSeen = firstSeen;
         this.lastSeen = lastSeen;
+        this.allowsTeleport = allowsTeleport;
     }
 
     public UUID getUUID() {
@@ -132,7 +138,16 @@ public final class User {
                         : "",
                 "lastAddress", lastAddress,
                 "firstSeen", firstSeen,
-                "lastSeen", lastSeen
+                "lastSeen", lastSeen,
+                "allowsTeleport", allowsTeleport
         );
+    }
+
+    public boolean isAllowsTeleport() {
+        return allowsTeleport;
+    }
+
+    public void setAllowsTeleport(boolean allowsTeleport) {
+        this.allowsTeleport = allowsTeleport;
     }
 }

@@ -10,6 +10,7 @@ import dev.azuuure.fundamentals.command.feed.FeedCommand;
 import dev.azuuure.fundamentals.command.heal.HealCommand;
 import dev.azuuure.fundamentals.command.ping.PingCommand;
 import dev.azuuure.fundamentals.command.spawn.SpawnCommand;
+import dev.azuuure.fundamentals.command.teleport.toggle.TeleportToggleCommand;
 import dev.azuuure.fundamentals.command.top.TopCommand;
 import dev.azuuure.fundamentals.command.website.WebsiteCommand;
 import dev.azuuure.fundamentals.command.workbench.WorkbenchCommand;
@@ -40,6 +41,7 @@ public class CommandLoader implements Loader {
         commandManager.registerCommand(new PingCommand(plugin));
         commandManager.registerCommand(new SpawnCommand(plugin));
         commandManager.registerCommand(new TopCommand(plugin));
+        commandManager.registerCommand(new TeleportToggleCommand(plugin));
         commandManager.registerCommand(new WebsiteCommand(plugin));
         commandManager.registerCommand(new WorkbenchCommand(plugin));
         commandManager.registerCommand(new FundamentalsCommand(plugin));

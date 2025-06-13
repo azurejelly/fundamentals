@@ -10,6 +10,7 @@ commands:
     must-provide-player: "<red>You must provide a player name.</red>"
     player-offline: "<red>That player is offline. Please try with another one or wait for them to come online.</red>"
     player-required: "<red>You must specify a player.</red>"
+    user-failure: "<red>General failure.</red>"
   clear:
     success: "<green>Your inventory has been cleared.</green>"
     success-other: "<green>The inventory of <target> has been cleared.</green>"
@@ -54,6 +55,16 @@ commands:
       success: "<green>Discord invite link set.</green>"
     no-invite: "<red>Sorry, we don't have a Discord server yet!</red>"
     invite: "<gold><bold><click:open_url:'<invite>'>Click here</click></bold></gold> to join our <color:#5865f2>Discord</color> server!"
+  teleport:
+    toggle:
+      self:
+        enabled: "<green>Teleport requests are now enabled.</green>"
+        disabled: "<red>Teleport requests are now disabled.</red>"
+      other:
+        enabled: "<green>Teleport requests for <target> are now enabled.</green>"
+        disabled: "<red>Teleport requests for <target> are now disabled.</red>"
+        enabled-by-admin: "<green>An administrator has enabled teleport requests for you.</green>"
+        disabled-by-admin: "<red>An administrator has disabled teleport requests for you.</red>"
   website:
     set:
       invalid-url: "<red>That's not a valid URL!</red>"

@@ -62,7 +62,8 @@ public class YAMLStorageImplementation implements StorageImplementation {
                     lastKnownLocation,
                     file.getString("data.lastAddress", null),
                     file.getLong("data.firstSeen", System.currentTimeMillis()),
-                    file.getLong("data.lastSeen", System.currentTimeMillis())
+                    file.getLong("data.lastSeen", System.currentTimeMillis()),
+                    file.getBoolean("data.allowsTeleport", true)
             );
 
             cache.put(uuid, user);
