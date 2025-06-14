@@ -13,6 +13,7 @@ import java.util.UUID;
 public final class User {
 
     private final UUID uuid;
+    private double money;
     private String lastKnownName;
     private Location lastKnownLocation;
     private String lastAddress;
@@ -23,6 +24,7 @@ public final class User {
     public User() {
         this(
                 UUID.randomUUID(),
+                0,
                 null,
                 null,
                 null,
@@ -35,6 +37,7 @@ public final class User {
     @JsonCreator
     public User(
             @JsonProperty("uuid") UUID uuid,
+            @JsonProperty("money") double money,
             @JsonProperty("lastKnownName") String lastKnownName,
             @JsonProperty("lastKnownLocation") Location lastKnownLocation,
             @JsonProperty("lastAddress") String lastAddress,
@@ -43,6 +46,7 @@ public final class User {
             @JsonProperty("allowsTeleport") boolean allowsTeleport
     ) {
         this.uuid = uuid;
+        this.money = money;
         this.lastKnownName = lastKnownName;
         this.lastKnownLocation = lastKnownLocation;
         this.lastAddress = lastAddress;
@@ -126,6 +130,7 @@ public final class User {
     public static User fromPlayer(Player player) {
         return new User(
                 player.getUniqueId(),
+                0,
                 player.getName(),
                 player.getLocation(),
                 player.getAddress() != null
@@ -140,6 +145,7 @@ public final class User {
     public static User fromUUID(UUID uuid) {
         return new User(
                 uuid,
+                0,
                 null,
                 null,
                 null,
@@ -147,5 +153,21 @@ public final class User {
                 System.currentTimeMillis(),
                 true
         );
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void addMoney(double amount) {
+        this.money += amount;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public void removeMoney(double amount) {
+        this.money -= amount;
     }
 }
