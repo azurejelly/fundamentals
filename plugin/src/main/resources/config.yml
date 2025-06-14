@@ -1,7 +1,7 @@
 config:
   spawn: ""
   storage:
-    type: "YAML"
+    type: "FILE"
     mongodb:
       uri: ""
       hostname: "127.0.0.1"

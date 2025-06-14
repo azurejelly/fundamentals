@@ -25,11 +25,20 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        User user = plugin.getStorage().getImplementation().loadUser(player.getUniqueId());
 
-        if (user != null) {
-            user.refresh();
-        }
+        plugin.getServer().getAsyncScheduler().runNow(plugin, (r) -> {
+            try {
+                User user = plugin.getStorage().getImplementation().loadUser(player.getUniqueId());
+                if (user != null) {
+                    user.refresh();
+                } else {
+                    user = User.fromPlayer(player);
+                    plugin.getStorage().getImplementation().saveUser(user);
+                }
+            } catch (RuntimeException ex) {
+                plugin.getLogger().log(Level.SEVERE, "Failed to load player data for " + player.getName(), ex);
+            }
+        });
 
         if (plugin.getConfig().getBoolean("config.join.custom-join-message", true)) {
             Server server = plugin.getServer();

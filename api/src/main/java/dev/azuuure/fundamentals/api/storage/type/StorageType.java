@@ -2,8 +2,7 @@ package dev.azuuure.fundamentals.api.storage.type;
 
 public enum StorageType {
 
-    YAML("YAML"),
-    JSON("JSON"),
+    FILE("JSON/File"),
     SQLITE("SQLite"),
     MYSQL("MySQL"),
     MONGODB("MongoDB");

@@ -3,7 +3,7 @@ package dev.azuuure.fundamentals.api.storage.factory;
 import dev.azuuure.fundamentals.api.file.YamlFile;
 import dev.azuuure.fundamentals.api.storage.Storage;
 import dev.azuuure.fundamentals.api.storage.exception.StorageInitializationException;
-import dev.azuuure.fundamentals.api.storage.implementation.yaml.YAMLStorageImplementation;
+import dev.azuuure.fundamentals.api.storage.implementation.file.FileStorageImplementation;
 import dev.azuuure.fundamentals.api.storage.type.StorageType;
 import org.bukkit.plugin.Plugin;
 
@@ -28,9 +28,9 @@ public class StorageFactory {
         }
 
         switch (type) {
-            case YAML: {
+            case FILE: {
                 try {
-                    return new Storage(plugin, new YAMLStorageImplementation(plugin));
+                    return new Storage(plugin, new FileStorageImplementation(plugin));
                 } catch (RuntimeException e) {
                     throw new StorageInitializationException("Failed to initialize YAML storage", e);
                 }

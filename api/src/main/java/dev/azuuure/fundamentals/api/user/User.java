@@ -1,12 +1,13 @@
 package dev.azuuure.fundamentals.api.user;
 
-import dev.azuuure.fundamentals.api.util.LocationUtils;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import java.util.Map;
 import java.util.UUID;
 
 public final class User {
@@ -20,43 +21,26 @@ public final class User {
     private boolean allowsTeleport;
 
     public User() {
-        this.uuid = UUID.randomUUID();
-        this.lastKnownName = null;
-        this.lastKnownLocation = null;
-        this.lastAddress = null;
-        this.firstSeen = System.currentTimeMillis();
-        this.lastSeen = System.currentTimeMillis();
-        this.allowsTeleport = true;
+        this(
+                UUID.randomUUID(),
+                null,
+                null,
+                null,
+                System.currentTimeMillis(),
+                System.currentTimeMillis(),
+                true
+        );
     }
 
-    public User(Player player) {
-        this.uuid = player.getUniqueId();
-        this.lastKnownName = player.getName();
-        this.lastKnownLocation = player.getLocation();
-        this.lastAddress = player.getAddress() != null ? player.getAddress().getHostString() : "n/a";
-        this.firstSeen = System.currentTimeMillis();
-        this.lastSeen = System.currentTimeMillis();
-        this.allowsTeleport = true;
-    }
-
-    public User(UUID uuid) {
-        this.uuid = uuid;
-        this.lastKnownName = "Unknown";
-        this.lastKnownLocation = null;
-        this.lastAddress = null;
-        this.firstSeen = System.currentTimeMillis();
-        this.lastSeen = System.currentTimeMillis();
-        this.allowsTeleport = true;
-    }
-
+    @JsonCreator
     public User(
-            UUID uuid,
-            String lastKnownName,
-            Location lastKnownLocation,
-            String lastAddress,
-            long firstSeen,
-            long lastSeen,
-            boolean allowsTeleport
+            @JsonProperty("uuid") UUID uuid,
+            @JsonProperty("lastKnownName") String lastKnownName,
+            @JsonProperty("lastKnownLocation") Location lastKnownLocation,
+            @JsonProperty("lastAddress") String lastAddress,
+            @JsonProperty("firstSeen") long firstSeen,
+            @JsonProperty("lastSeen") long lastSeen,
+            @JsonProperty("allowsTeleport") boolean allowsTeleport
     ) {
         this.uuid = uuid;
         this.lastKnownName = lastKnownName;
@@ -71,10 +55,12 @@ public final class User {
         return uuid;
     }
 
+    @JsonIgnore
     public Player getPlayer() {
         return Bukkit.getPlayer(uuid);
     }
 
+    @JsonIgnore
     public OfflinePlayer getOfflinePlayer() {
         return Bukkit.getOfflinePlayer(uuid);
     }
@@ -129,25 +115,37 @@ public final class User {
         }
     }
 
-    public Map<String, Object> serialize() {
-        return Map.of(
-                "uuid", uuid.toString(),
-                "lastKnownName", lastKnownName,
-                "lastKnownLocation", lastKnownLocation != null
-                        ? LocationUtils.serialize(lastKnownLocation)
-                        : "",
-                "lastAddress", lastAddress,
-                "firstSeen", firstSeen,
-                "lastSeen", lastSeen,
-                "allowsTeleport", allowsTeleport
-        );
-    }
-
     public boolean isAllowsTeleport() {
         return allowsTeleport;
     }
 
     public void setAllowsTeleport(boolean allowsTeleport) {
         this.allowsTeleport = allowsTeleport;
+    }
+
+    public static User fromPlayer(Player player) {
+        return new User(
+                player.getUniqueId(),
+                player.getName(),
+                player.getLocation(),
+                player.getAddress() != null
+                        ? player.getAddress().getHostString()
+                        : null,
+                System.currentTimeMillis(),
+                System.currentTimeMillis(),
+                true
+        );
+    }
+
+    public static User fromUUID(UUID uuid) {
+        return new User(
+                uuid,
+                null,
+                null,
+                null,
+                System.currentTimeMillis(),
+                System.currentTimeMillis(),
+                true
+        );
     }
 }

@@ -7,6 +7,8 @@ repositories {
 }
 
 dependencies {
+    api(libs.jackson.databind)
+
     compileOnly(libs.paper) {
         // Excluded so that we do not import the wrong @Inject class.
         // Guice for some reason does not follow javax.inject annotations,
