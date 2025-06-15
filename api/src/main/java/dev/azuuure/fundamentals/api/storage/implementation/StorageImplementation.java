@@ -11,6 +11,8 @@ public interface StorageImplementation {
 
     User loadUser(UUID uuid);
 
+    User loadOrCreate(UUID uuid, String name);
+
     User getUser(UUID uuid);
 
     void saveUser(User user);

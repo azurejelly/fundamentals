@@ -36,7 +36,7 @@ public class Fundamentals extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        loaders.forEach(Loader::load);
+        loaders.forEach(Loader::unload);
         getLogger().info(getDescription().getName() + " version " + getDescription().getVersion() + " has been disabled.");
     }
 

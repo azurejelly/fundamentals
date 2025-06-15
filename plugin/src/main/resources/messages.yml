@@ -2,8 +2,14 @@ welcome-message: "<gradient:#e3a3ce:#f291d8:#e3a3ce>Welcome to the server, <name
 alerts:
   player-join: "<color:#ff4d73><b>ℹ</b></color> <color:#ff8791><name></color> has joined the server."
   player-leave: "<color:#ff4d73><b>ℹ</b></color> <color:#ff8791><name></color> has left the server."
+errors:
+  data-load-fail: "<red>Failed to load player data. Please contact an administrator for help.</red>"
 commands:
   general:
+    invalid-argument: "<red>One or more arguments are invalid.</red>"
+    too-many-arguments: "<red>Too many arguments.</red>"
+    not-enough-arguments: "<red>Not enough arguments.</red>"
+    unknown-command: "<red>Unknown command.</red>"
     no-permission: "<red>You do not have permission to use this command.</red>"
     player-only: "<red>This command can only be used by players.</red>"
     console-only: "<red>This command can only be used from the console.</red>"

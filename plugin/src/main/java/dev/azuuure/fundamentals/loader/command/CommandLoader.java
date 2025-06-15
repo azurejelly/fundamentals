@@ -33,6 +33,16 @@ public class CommandLoader implements Loader {
 
     @Override
     public void load() {
+        // Configure messages
+        this.configureMessage(MessageKey.INVALID_ARGUMENT, "commands.general.invalid-argument");
+        this.configureMessage(MessageKey.UNKNOWN_COMMAND, "commands.general.unknown-command");
+        this.configureMessage(MessageKey.NOT_ENOUGH_ARGUMENTS, "commands.general.not-enough-arguments");
+        this.configureMessage(MessageKey.TOO_MANY_ARGUMENTS, "commands.general.too-many-arguments");
+        this.configureMessage(BukkitMessageKey.NO_PERMISSION, "commands.general.no-permission");
+        this.configureMessage(BukkitMessageKey.PLAYER_ONLY, "commands.general.player-only");
+        this.configureMessage(BukkitMessageKey.CONSOLE_ONLY, "commands.general.console-only");
+
+        // Register commands
         commandManager.registerCommand(new BroadcastCommand(plugin));
         commandManager.registerCommand(new ClearCommand(plugin));
         commandManager.registerCommand(new DiscordCommand(plugin));

@@ -8,6 +8,7 @@ repositories {
 
 dependencies {
     api(libs.jackson.databind)
+    api(libs.mongojack)
 
     compileOnly(libs.paper) {
         // Excluded so that we do not import the wrong @Inject class.

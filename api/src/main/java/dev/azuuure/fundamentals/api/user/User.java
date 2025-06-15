@@ -7,11 +7,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.mongojack.Id;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.UUID;
 
 public final class User {
 
+    @Id @JsonProperty("_id")
     private final UUID uuid;
     private double money;
     private String lastKnownName;
@@ -21,22 +25,20 @@ public final class User {
     private long lastSeen;
     private boolean allowsTeleport;
 
-    public User() {
-        this(
-                UUID.randomUUID(),
-                0,
-                null,
-                null,
-                null,
-                System.currentTimeMillis(),
-                System.currentTimeMillis(),
-                true
-        );
+    public User(UUID uuid, String name) {
+        this.uuid = uuid;
+        this.lastKnownName = name;
+        this.lastKnownLocation = null;
+        this.lastAddress = null;
+        this.firstSeen = System.currentTimeMillis();
+        this.lastSeen = System.currentTimeMillis();
+        this.money = 0;
+        this.allowsTeleport = true;
     }
 
     @JsonCreator
     public User(
-            @JsonProperty("uuid") UUID uuid,
+            @Id @JsonProperty("_id") UUID uuid,
             @JsonProperty("money") double money,
             @JsonProperty("lastKnownName") String lastKnownName,
             @JsonProperty("lastKnownLocation") Location lastKnownLocation,
@@ -93,6 +95,21 @@ public final class User {
         this.lastAddress = lastAddress;
     }
 
+    public void setLastAddress(InetAddress address) {
+        this.lastAddress = address != null
+                ? address.getHostAddress()
+                : null;
+    }
+
+    public void setLastAddress(InetSocketAddress socketAddress) {
+        if (socketAddress == null) {
+            this.lastAddress = null;
+            return;
+        }
+
+        this.setLastAddress(socketAddress.getAddress());
+    }
+
     public long getFirstSeen() {
         return firstSeen;
     }
@@ -114,7 +131,7 @@ public final class User {
         if (player != null) {
             setLastKnownName(player.getName());
             setLastKnownLocation(player.getLocation());
-            setLastAddress(player.getAddress() != null ? player.getAddress().getHostString() : "n/a");
+            setLastAddress(player.getAddress());
             updateLastSeen();
         }
     }
@@ -125,34 +142,6 @@ public final class User {
 
     public void setAllowsTeleport(boolean allowsTeleport) {
         this.allowsTeleport = allowsTeleport;
-    }
-
-    public static User fromPlayer(Player player) {
-        return new User(
-                player.getUniqueId(),
-                0,
-                player.getName(),
-                player.getLocation(),
-                player.getAddress() != null
-                        ? player.getAddress().getHostString()
-                        : null,
-                System.currentTimeMillis(),
-                System.currentTimeMillis(),
-                true
-        );
-    }
-
-    public static User fromUUID(UUID uuid) {
-        return new User(
-                uuid,
-                0,
-                null,
-                null,
-                null,
-                System.currentTimeMillis(),
-                System.currentTimeMillis(),
-                true
-        );
     }
 
     public double getMoney() {
@@ -169,5 +158,22 @@ public final class User {
 
     public void removeMoney(double amount) {
         this.money -= amount;
+    }
+
+    public static User from(UUID uuid, String name, InetAddress address) {
+        String ip = address != null
+                ? address.getHostAddress()
+                : null;
+
+        return new User(
+                uuid,
+                0,
+                name,
+                null,
+                ip,
+                System.currentTimeMillis(),
+                System.currentTimeMillis(),
+                true
+        );
     }
 }

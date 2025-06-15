@@ -12,6 +12,7 @@ paper = "io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT"
 triumph-cmd = "dev.triumphteam:triumph-cmd-bukkit:2.0.0-SNAPSHOT"
 miniplaceholders = "io.github.miniplaceholders:miniplaceholders-api:2.3.0"
 jackson-databind = "com.fasterxml.jackson.core:jackson-databind:2.17.2"
+mongojack = "org.mongojack:mongojack:5.0.2"
 junit = { module = "org.junit:junit", version.ref = "junit" }
 junitJupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 

@@ -2,11 +2,13 @@ config:
   spawn: ""
   storage:
     type: "FILE"
+    kick-on-load-fail: true
     mongodb:
       uri: ""
       hostname: "127.0.0.1"
       port: 27017
       database: "fundamentals"
+      auth-database: "admin"
       username: ""
       password: ""
   join:

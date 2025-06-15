@@ -61,6 +61,18 @@ public class FileStorageImplementation implements StorageImplementation {
     }
 
     @Override
+    public User loadOrCreate(UUID uuid, String name) {
+        User user = loadUser(uuid);
+        if (user != null) {
+            return user;
+        } else {
+            user = new User(uuid, name);
+            cache.put(uuid, user);
+            return user;
+        }
+    }
+
+    @Override
     public User getUser(UUID uuid) {
         return cache.computeIfAbsent(uuid, this::loadUser);
     }
