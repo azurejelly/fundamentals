@@ -16,7 +16,11 @@ commands:
     must-provide-player: "<red>You must provide a player name.</red>"
     player-offline: "<red>That player is offline. Please try with another one or wait for them to come online.</red>"
     player-required: "<red>You must specify a player.</red>"
+    user-not-found: "<red>Player data not found.</red>"
     user-failure: "<red>General failure.</red>"
+  balance:
+    self: "<yellow>Your current balance is <gold>$<balance></gold></yellow>"
+    other: "<yellow>The balance of <aqua><player></aqua> is <gold>$<balance></gold></yellow>"
   clear:
     success: "<green>Your inventory has been cleared.</green>"
     success-other: "<green>The inventory of <target> has been cleared.</green>"

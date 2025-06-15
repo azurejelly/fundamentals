@@ -3,6 +3,7 @@ package dev.azuuure.fundamentals.loader.command;
 import dev.azuuure.fundamentals.Fundamentals;
 import dev.azuuure.fundamentals.api.loader.Loader;
 import dev.azuuure.fundamentals.command.FundamentalsCommand;
+import dev.azuuure.fundamentals.command.balance.BalanceCommand;
 import dev.azuuure.fundamentals.command.broadcast.BroadcastCommand;
 import dev.azuuure.fundamentals.command.clear.ClearCommand;
 import dev.azuuure.fundamentals.command.discord.DiscordCommand;
@@ -43,6 +44,7 @@ public class CommandLoader implements Loader {
         this.configureMessage(BukkitMessageKey.CONSOLE_ONLY, "commands.general.console-only");
 
         // Register commands
+        commandManager.registerCommand(new BalanceCommand(plugin));
         commandManager.registerCommand(new BroadcastCommand(plugin));
         commandManager.registerCommand(new ClearCommand(plugin));
         commandManager.registerCommand(new DiscordCommand(plugin));
