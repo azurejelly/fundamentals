@@ -74,6 +74,15 @@ public final class FileUserStorage implements UserStorage {
     }
 
     @Override
+    public boolean exists(UUID uuid) {
+        if (cache.containsKey(uuid)) {
+            return true;
+        }
+
+        return new File(userDirectory, uuid + ".json").exists();
+    }
+
+    @Override
     public User getUser(UUID uuid) {
         return cache.computeIfAbsent(uuid, this::loadUser);
     }

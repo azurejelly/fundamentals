@@ -91,6 +91,20 @@ public final class MongoUserStorage implements UserStorage {
     }
 
     @Override
+    public boolean exists(UUID uuid) {
+        if (cache.containsKey(uuid)) {
+            return true;
+        }
+
+        try {
+            return collection.findOneById(uuid) != null;
+        } catch (MongoException ex) {
+            plugin.getLogger().log(Level.SEVERE, "Failed to check existence of user " + uuid, ex);
+            return false;
+        }
+    }
+
+    @Override
     public User getUser(UUID uuid) {
         return cache.computeIfAbsent(uuid, this::loadUser);
     }

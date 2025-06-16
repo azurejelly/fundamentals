@@ -15,6 +15,8 @@ public interface UserStorage {
 
     User loadOrCreate(UUID uuid, String name);
 
+    boolean exists(UUID uuid);
+
     User getUser(UUID uuid);
 
     void saveUser(User user);
