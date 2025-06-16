@@ -22,9 +22,7 @@ public class AsyncPlayerPreLoginListener implements Listener {
         UUID uuid = event.getUniqueId();
         String name = event.getName();
         InetAddress address = event.getAddress();
-        User user = plugin.getStorage()
-                .getImplementation()
-                .loadOrCreate(uuid, name);
+        User user = plugin.getUserStorage().loadOrCreate(uuid, name);
 
         if (user != null) {
             user.setLastKnownName(name);

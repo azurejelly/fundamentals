@@ -2,7 +2,7 @@ package dev.azuuure.fundamentals;
 
 import dev.azuuure.fundamentals.api.loader.Loader;
 import dev.azuuure.fundamentals.api.file.YamlFile;
-import dev.azuuure.fundamentals.api.storage.Storage;
+import dev.azuuure.fundamentals.api.storage.UserStorage;
 import dev.azuuure.fundamentals.loader.command.CommandLoader;
 import dev.azuuure.fundamentals.loader.config.ConfigurationLoader;
 import dev.azuuure.fundamentals.loader.listener.ListenerLoader;
@@ -17,7 +17,7 @@ public class Fundamentals extends JavaPlugin {
 
     private Set<Loader> loaders;
     private YamlFile config, messages;
-    private Storage storage;
+    private UserStorage userStorage;
 
     @Override
     public void onLoad() {
@@ -49,12 +49,12 @@ public class Fundamentals extends JavaPlugin {
         return messages;
     }
 
-    public Storage getStorage() {
-        return storage;
+    public UserStorage getUserStorage() {
+        return userStorage;
     }
 
-    public void setStorage(Storage storage) {
-        this.storage = storage;
+    public void setUserStorage(UserStorage userStorage) {
+        this.userStorage = userStorage;
     }
 
     public void setConfig(YamlFile config) {

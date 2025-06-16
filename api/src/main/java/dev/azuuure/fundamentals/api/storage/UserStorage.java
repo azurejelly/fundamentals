@@ -1,11 +1,11 @@
-package dev.azuuure.fundamentals.api.storage.implementation;
+package dev.azuuure.fundamentals.api.storage;
 
 import dev.azuuure.fundamentals.api.user.User;
 
 import java.util.Map;
 import java.util.UUID;
 
-public interface StorageImplementation {
+public interface UserStorage {
 
     void init();
 

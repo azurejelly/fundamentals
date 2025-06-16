@@ -1,6 +1,5 @@
 package dev.azuuure.fundamentals.api.storage.implementation.mongodb;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
 import com.mongodb.MongoException;
@@ -8,7 +7,7 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import dev.azuuure.fundamentals.api.jackson.factory.ObjectMapperFactory;
-import dev.azuuure.fundamentals.api.storage.implementation.StorageImplementation;
+import dev.azuuure.fundamentals.api.storage.UserStorage;
 import dev.azuuure.fundamentals.api.storage.implementation.mongodb.settings.MongoStorageSettings;
 import dev.azuuure.fundamentals.api.user.User;
 import org.bson.UuidRepresentation;
@@ -21,7 +20,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
-public class MongoStorageImplementation implements StorageImplementation {
+public final class MongoUserStorage implements UserStorage {
 
     private final Plugin plugin;
     private final MongoStorageSettings settings;
@@ -29,7 +28,7 @@ public class MongoStorageImplementation implements StorageImplementation {
     private JacksonMongoCollection<User> collection;
     private MongoClient mongoClient;
 
-    public MongoStorageImplementation(Plugin plugin, MongoStorageSettings settings) {
+    public MongoUserStorage(Plugin plugin, MongoStorageSettings settings) {
         this.plugin = plugin;
         this.settings = settings;
     }

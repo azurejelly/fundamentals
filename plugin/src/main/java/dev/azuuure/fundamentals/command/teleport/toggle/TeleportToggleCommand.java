@@ -53,7 +53,7 @@ public class TeleportToggleCommand extends BaseCommand {
             self = false;
         }
 
-        User user = plugin.getStorage().getImplementation().getUser(target.getUniqueId());
+        User user = plugin.getUserStorage().getUser(target.getUniqueId());
         if (user == null) {
             sender.sendMessage(plugin.getMessages().getComponent("commands.general.user-failure"));
             return;

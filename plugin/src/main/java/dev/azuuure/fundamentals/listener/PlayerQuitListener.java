@@ -20,11 +20,11 @@ public class PlayerQuitListener implements Listener {
     @EventHandler
     public void onPlayerQuitEvent(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        User user = plugin.getStorage().getImplementation().getUser(player.getUniqueId());
+        User user = plugin.getUserStorage().getUser(player.getUniqueId());
 
         if (user != null) {
             user.refresh();
-            plugin.getStorage().getImplementation().saveUser(user);
+            plugin.getUserStorage().saveUser(user);
         }
 
         if (plugin.getConfig().getBoolean("config.quit.custom-quit-message", true)) {

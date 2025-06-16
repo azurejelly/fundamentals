@@ -3,7 +3,7 @@ package dev.azuuure.fundamentals.api.storage.implementation.file;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.azuuure.fundamentals.api.jackson.factory.ObjectMapperFactory;
 import dev.azuuure.fundamentals.api.storage.exception.StorageInitializationException;
-import dev.azuuure.fundamentals.api.storage.implementation.StorageImplementation;
+import dev.azuuure.fundamentals.api.storage.UserStorage;
 import dev.azuuure.fundamentals.api.user.User;
 import org.bukkit.plugin.Plugin;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
-public class FileStorageImplementation implements StorageImplementation {
+public final class FileUserStorage implements UserStorage {
 
     private final Plugin plugin;
     private final Map<UUID, User> cache;
@@ -22,13 +22,13 @@ public class FileStorageImplementation implements StorageImplementation {
     private File userDirectory;
     private ObjectMapper mapper;
 
-    public FileStorageImplementation(Plugin plugin, boolean verbose) {
+    public FileUserStorage(Plugin plugin, boolean verbose) {
         this.plugin = plugin;
         this.cache = new ConcurrentHashMap<>();
         this.verbose = verbose;
     }
 
-    public FileStorageImplementation(Plugin plugin) {
+    public FileUserStorage(Plugin plugin) {
         this(plugin, false);
     }
 
