@@ -1,5 +1,7 @@
 package dev.azuuure.fundamentals.api.storage;
 
+import dev.azuuure.fundamentals.api.storage.exception.StorageInitializationException;
+import dev.azuuure.fundamentals.api.storage.exception.StorageShutdownException;
 import dev.azuuure.fundamentals.api.user.User;
 
 import java.util.Map;
@@ -7,7 +9,7 @@ import java.util.UUID;
 
 public interface UserStorage {
 
-    void init();
+    void init() throws StorageInitializationException;
 
     User loadUser(UUID uuid);
 
@@ -25,5 +27,5 @@ public interface UserStorage {
 
     Map<UUID, User> getAllLoaded();
 
-    void shutdown();
+    void shutdown() throws StorageShutdownException;
 }

@@ -7,16 +7,17 @@ import dev.azuuure.fundamentals.api.storage.implementation.file.FileUserStorage;
 import dev.azuuure.fundamentals.api.storage.implementation.mongodb.MongoUserStorage;
 import dev.azuuure.fundamentals.api.storage.implementation.mongodb.settings.MongoStorageSettings;
 import dev.azuuure.fundamentals.api.storage.type.StorageType;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
 public final class UserStorageFactory {
 
     private final Plugin plugin;
-    private final YamlFile config;
+    private final FileConfiguration config;
 
-    public UserStorageFactory(Plugin plugin, YamlFile config) {
+    public UserStorageFactory(Plugin plugin) {
         this.plugin = plugin;
-        this.config = config;
+        this.config = plugin.getConfig();
     }
 
     public UserStorage create() {

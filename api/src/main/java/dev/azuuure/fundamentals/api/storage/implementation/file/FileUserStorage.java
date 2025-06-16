@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.azuuure.fundamentals.api.jackson.factory.ObjectMapperFactory;
 import dev.azuuure.fundamentals.api.storage.exception.StorageInitializationException;
 import dev.azuuure.fundamentals.api.storage.UserStorage;
+import dev.azuuure.fundamentals.api.storage.exception.StorageShutdownException;
 import dev.azuuure.fundamentals.api.user.User;
 import org.bukkit.plugin.Plugin;
 
@@ -33,7 +34,7 @@ public final class FileUserStorage implements UserStorage {
     }
 
     @Override
-    public void init() {
+    public void init() throws StorageInitializationException {
         this.plugin.getLogger().info("Initializing JSON storage implementation.");
         this.mapper = ObjectMapperFactory.create();
         this.userDirectory = new File(plugin.getDataFolder(), "users");
@@ -108,10 +109,10 @@ public final class FileUserStorage implements UserStorage {
     }
 
     @Override
-    public void shutdown() {
+    public void shutdown() throws StorageShutdownException {
         int loaded = this.getAllLoaded().size();
         this.plugin.getLogger().info("Shutting down JSON storage implementation. This could take a while.");
         this.getAllLoaded().forEach((id, user) -> saveUser(user));
-        this.plugin.getLogger().info("Saved " + loaded + " user(s).");
+        this.plugin.getLogger().info("Saved " + loaded + " user(s) to disk.");
     }
 }

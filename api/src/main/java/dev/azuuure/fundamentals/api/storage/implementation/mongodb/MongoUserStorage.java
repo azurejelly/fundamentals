@@ -8,6 +8,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import dev.azuuure.fundamentals.api.jackson.factory.ObjectMapperFactory;
 import dev.azuuure.fundamentals.api.storage.UserStorage;
+import dev.azuuure.fundamentals.api.storage.exception.StorageInitializationException;
+import dev.azuuure.fundamentals.api.storage.exception.StorageShutdownException;
 import dev.azuuure.fundamentals.api.storage.implementation.mongodb.settings.MongoStorageSettings;
 import dev.azuuure.fundamentals.api.user.User;
 import org.bson.UuidRepresentation;
@@ -34,7 +36,7 @@ public final class MongoUserStorage implements UserStorage {
     }
 
     @Override
-    public void init() {
+    public void init() throws StorageInitializationException {
         String database = settings.getDatabase();
 
         if (database == null || database.trim().isEmpty()) {
@@ -127,7 +129,7 @@ public final class MongoUserStorage implements UserStorage {
     }
 
     @Override
-    public void shutdown() {
+    public void shutdown() throws StorageShutdownException {
         this.plugin.getLogger().info("Shutting down MongoDB storage implementation...");
         this.cache.forEach((uuid, user) -> saveUser(user));
 
@@ -135,7 +137,7 @@ public final class MongoUserStorage implements UserStorage {
             try {
                 this.mongoClient.close();
             } catch (RuntimeException ex) {
-                this.plugin.getLogger().log(Level.SEVERE, "Failed to close MongoDB connection ", ex);
+                throw new StorageShutdownException("Failed to close MongoDB client", ex);
             }
         }
 
