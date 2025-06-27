@@ -6,6 +6,7 @@ import dev.triumphteam.cmd.core.BaseCommand;
 import dev.triumphteam.cmd.core.annotation.Command;
 import dev.triumphteam.cmd.core.annotation.Default;
 import dev.triumphteam.cmd.core.annotation.Optional;
+import dev.triumphteam.cmd.core.annotation.Suggestion;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.CommandSender;
@@ -23,7 +24,7 @@ public class EcoCommand extends BaseCommand {
 
     @Default
     @Permission("fundamentals.command.eco")
-    public void execute(CommandSender sender, String action, Player target, @Optional Double amount) {
+    public void execute(CommandSender sender, @Suggestion("ecoOperations") String action, Player target, @Optional Double amount) {
         RegisteredServiceProvider<Economy> provider = plugin.getServer()
                 .getServicesManager()
                 .getRegistration(Economy.class);

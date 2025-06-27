@@ -21,8 +21,11 @@ import dev.triumphteam.cmd.bukkit.BukkitCommandManager;
 import dev.triumphteam.cmd.bukkit.message.BukkitMessageKey;
 import dev.triumphteam.cmd.core.message.MessageKey;
 import dev.triumphteam.cmd.core.message.context.MessageContext;
+import dev.triumphteam.cmd.core.suggestion.SuggestionKey;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.command.CommandSender;
+
+import java.util.List;
 
 public class CommandLoader implements Loader {
 
@@ -59,10 +62,15 @@ public class CommandLoader implements Loader {
         commandManager.registerCommand(new WorkbenchCommand(plugin));
         commandManager.registerCommand(new FundamentalsCommand(plugin));
 
-        // Only register these commands if Vault is enabled
+        // Only register these commands and suggestions if Vault is enabled
         if (VaultUtils.isVaultAvailable()) {
             commandManager.registerCommand(new BalanceCommand(plugin));
             commandManager.registerCommand(new EcoCommand(plugin));
+
+            commandManager.registerSuggestion(
+                    SuggestionKey.of("ecoOperations"),
+                    (s, ctx) -> List.of("add", "remove", "set", "clear")
+            );
         }
     }
 
