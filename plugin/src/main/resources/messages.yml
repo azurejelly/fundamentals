@@ -2,6 +2,7 @@ welcome-message: "<gradient:#e3a3ce:#f291d8:#e3a3ce>Welcome to the server, <name
 alerts:
   player-join: "<color:#ff4d73><b>ℹ</b></color> <color:#ff8791><name></color> has joined the server."
   player-leave: "<color:#ff4d73><b>ℹ</b></color> <color:#ff8791><name></color> has left the server."
+  mobile-ad-blocked: "<red>An advertisement sent by the app you're connecting from has been blocked.</red>"
 errors:
   data-load-fail: "<red>Failed to load player data. Please contact an administrator for help.</red>"
   no-vault: "<red>Vault is not installed on this server. Economy features are disabled.</red>"

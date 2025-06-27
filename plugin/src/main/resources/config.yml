@@ -31,3 +31,7 @@ config:
     discord: ""
     website: ""
     store: ""
+  utilities:
+    block-mobile-ads:
+      enabled: true
+      send-alert: true
