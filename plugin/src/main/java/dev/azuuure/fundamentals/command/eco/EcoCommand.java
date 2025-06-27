@@ -23,7 +23,7 @@ public class EcoCommand extends BaseCommand {
 
     @Default
     @Permission("fundamentals.command.eco")
-    public void execute(CommandSender sender, Player target, String action, @Optional Double amount) {
+    public void execute(CommandSender sender, String action, Player target, @Optional Double amount) {
         RegisteredServiceProvider<Economy> provider = plugin.getServer()
                 .getServicesManager()
                 .getRegistration(Economy.class);
