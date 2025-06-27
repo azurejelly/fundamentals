@@ -64,13 +64,13 @@ public class CommandLoader implements Loader {
 
         // Only register these commands and suggestions if Vault is enabled
         if (VaultUtils.isVaultAvailable()) {
-            commandManager.registerCommand(new BalanceCommand(plugin));
-            commandManager.registerCommand(new EcoCommand(plugin));
-
             commandManager.registerSuggestion(
                     SuggestionKey.of("ecoOperations"),
                     (s, ctx) -> List.of("add", "remove", "set", "clear")
             );
+
+            commandManager.registerCommand(new BalanceCommand(plugin));
+            commandManager.registerCommand(new EcoCommand(plugin));
         }
     }
 
