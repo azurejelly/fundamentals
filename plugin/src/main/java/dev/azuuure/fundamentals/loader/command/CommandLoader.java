@@ -7,6 +7,7 @@ import dev.azuuure.fundamentals.command.balance.BalanceCommand;
 import dev.azuuure.fundamentals.command.broadcast.BroadcastCommand;
 import dev.azuuure.fundamentals.command.clear.ClearCommand;
 import dev.azuuure.fundamentals.command.discord.DiscordCommand;
+import dev.azuuure.fundamentals.command.eco.EcoCommand;
 import dev.azuuure.fundamentals.command.feed.FeedCommand;
 import dev.azuuure.fundamentals.command.heal.HealCommand;
 import dev.azuuure.fundamentals.command.ping.PingCommand;
@@ -61,6 +62,7 @@ public class CommandLoader implements Loader {
         // Only register these commands if Vault is enabled
         if (VaultUtils.isVaultAvailable()) {
             commandManager.registerCommand(new BalanceCommand(plugin));
+            commandManager.registerCommand(new EcoCommand(plugin));
         }
     }
 

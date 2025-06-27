@@ -23,6 +23,17 @@ commands:
   balance:
     self: "<yellow>Your current balance is <gold>$<balance></gold></yellow>"
     other: "<yellow>The balance of <aqua><player></aqua> is <gold>$<balance></gold></yellow>"
+  eco:
+    no-amount: "<red>Please provide some amount of money!</red>"
+    invalid-op: "<red>Invalid operation. Must be 'add', 'remove', 'set' or 'clear'.</red>"
+    add:
+      success: "<green>Added <dark_green>$<amount></dark_green> to <dark_green><target></dark_green>. New balance: <dark_green>$<new_amount></dark_green></green>"
+    remove:
+      success: "<green>Removed <dark_green>$<amount></dark_green> to <dark_green><target></dark_green>. New balance: <dark_green>$<new_amount></dark_green></green>"
+    set:
+      success: "<green>Set <dark_green><target>'s</dark_green> balance to <dark_green>$<amount></dark_green>.</green>"
+    clear:
+      success: "<green>Cleared <dark_green><target>'s</dark_green> balance.</green>"
   clear:
     success: "<green>Your inventory has been cleared.</green>"
     success-other: "<green>The inventory of <target> has been cleared.</green>"
