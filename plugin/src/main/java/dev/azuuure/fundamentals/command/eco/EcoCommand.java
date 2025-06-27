@@ -35,73 +35,51 @@ public class EcoCommand extends BaseCommand {
         }
 
         Economy economy = provider.getProvider();
-        switch (action.toLowerCase()) {
-            case "add": {
-                if (amount == null) {
-                    sender.sendMessage(plugin.getMessages().getComponent("commands.eco.no-amount"));
-                    return;
+        if (action.equalsIgnoreCase("clear")) {
+            economy.withdrawPlayer(target, economy.getBalance(target));
+            sender.sendMessage(
+                    plugin.getMessages().getComponent("commands.eco.clear.success",
+                            Placeholder.unparsed("target", target.getName())
+                    )
+            );
+        } else {
+            if (amount == null) {
+                sender.sendMessage(plugin.getMessages().getComponent("commands.eco.no-amount"));
+                return;
+            }
+
+            switch (action.toLowerCase()) {
+                case "add" -> {
+                    economy.depositPlayer(target, amount);
+                    sender.sendMessage(
+                            plugin.getMessages().getComponent("commands.eco.add.success",
+                                    Placeholder.unparsed("amount", economy.format(amount)),
+                                    Placeholder.unparsed("new_amount", economy.format(economy.getBalance(target))),
+                                    Placeholder.unparsed("target", target.getName())
+                            )
+                    );
                 }
-
-                economy.depositPlayer(target, amount);
-                sender.sendMessage(
-                        plugin.getMessages().getComponent("commands.eco.add.success",
-                                Placeholder.unparsed("amount", economy.format(amount)),
-                                Placeholder.unparsed("new_amount", economy.format(economy.getBalance(target))),
-                                Placeholder.unparsed("target", target.getName())
-                        )
-                );
-
-                return;
-            }
-            case "remove": {
-                if (amount == null) {
-                    sender.sendMessage(plugin.getMessages().getComponent("commands.eco.no-amount"));
-                    return;
+                case "remove" -> {
+                    economy.withdrawPlayer(target, amount);
+                    sender.sendMessage(
+                            plugin.getMessages().getComponent("commands.eco.remove.success",
+                                    Placeholder.unparsed("amount", economy.format(amount)),
+                                    Placeholder.unparsed("new_amount", economy.format(economy.getBalance(target))),
+                                    Placeholder.unparsed("target", target.getName())
+                            )
+                    );
                 }
-
-                economy.withdrawPlayer(target, amount);
-                sender.sendMessage(
-                        plugin.getMessages().getComponent("commands.eco.remove.success",
-                                Placeholder.unparsed("amount", economy.format(amount)),
-                                Placeholder.unparsed("new_amount", economy.format(economy.getBalance(target))),
-                                Placeholder.unparsed("target", target.getName())
-                        )
-                );
-
-                return;
-            }
-            case "set": {
-                if (amount == null) {
-                    sender.sendMessage(plugin.getMessages().getComponent("commands.eco.no-amount"));
-                    return;
+                case "set" -> {
+                    economy.withdrawPlayer(target, economy.getBalance(target));
+                    economy.depositPlayer(target, amount);
+                    sender.sendMessage(
+                            plugin.getMessages().getComponent("commands.eco.set.success",
+                                    Placeholder.unparsed("amount", economy.format(amount)),
+                                    Placeholder.unparsed("target", target.getName())
+                            )
+                    );
                 }
-
-                economy.withdrawPlayer(target, economy.getBalance(target));
-                economy.depositPlayer(target, amount);
-
-                sender.sendMessage(
-                        plugin.getMessages().getComponent("commands.eco.set.success",
-                                Placeholder.unparsed("amount", economy.format(amount)),
-                                Placeholder.unparsed("target", target.getName())
-                        )
-                );
-
-                return;
-            }
-            case "clear":
-            case "reset": {
-                economy.withdrawPlayer(target, economy.getBalance(target));
-                sender.sendMessage(
-                        plugin.getMessages().getComponent("commands.eco.set.success",
-                                Placeholder.unparsed("amount", economy.format(amount)),
-                                Placeholder.unparsed("target", target.getName())
-                        )
-                );
-
-                return;
-            }
-            default: {
-                sender.sendMessage(plugin.getMessages().getComponent("commands.eco.invalid-op"));
+                default -> sender.sendMessage(plugin.getMessages().getComponent("commands.eco.invalid-op"));
             }
         }
     }
