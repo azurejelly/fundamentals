@@ -7,6 +7,7 @@ import dev.azuuure.fundamentals.loader.command.CommandLoader;
 import dev.azuuure.fundamentals.loader.config.ConfigurationLoader;
 import dev.azuuure.fundamentals.loader.listener.ListenerLoader;
 import dev.azuuure.fundamentals.loader.storage.StorageLoader;
+import dev.azuuure.fundamentals.loader.vault.VaultLoader;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +27,7 @@ public class Fundamentals extends JavaPlugin {
         this.loaders.add(new CommandLoader(this));
         this.loaders.add(new ListenerLoader(this));
         this.loaders.add(new StorageLoader(this));
+        this.loaders.add(new VaultLoader(this));
     }
 
     @Override

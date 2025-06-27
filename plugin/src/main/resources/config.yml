@@ -1,5 +1,9 @@
 config:
   spawn: ""
+  vault:
+    economy:
+      enabled: true
+      format: "%.2f"
   storage:
     type: "FILE"
     kick-on-load-fail: true

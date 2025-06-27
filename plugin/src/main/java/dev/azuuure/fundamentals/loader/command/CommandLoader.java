@@ -15,6 +15,7 @@ import dev.azuuure.fundamentals.command.teleport.toggle.TeleportToggleCommand;
 import dev.azuuure.fundamentals.command.top.TopCommand;
 import dev.azuuure.fundamentals.command.website.WebsiteCommand;
 import dev.azuuure.fundamentals.command.workbench.WorkbenchCommand;
+import dev.azuuure.fundamentals.utils.VaultUtils;
 import dev.triumphteam.cmd.bukkit.BukkitCommandManager;
 import dev.triumphteam.cmd.bukkit.message.BukkitMessageKey;
 import dev.triumphteam.cmd.core.message.MessageKey;
@@ -44,7 +45,6 @@ public class CommandLoader implements Loader {
         this.configureMessage(BukkitMessageKey.CONSOLE_ONLY, "commands.general.console-only");
 
         // Register commands
-        commandManager.registerCommand(new BalanceCommand(plugin));
         commandManager.registerCommand(new BroadcastCommand(plugin));
         commandManager.registerCommand(new ClearCommand(plugin));
         commandManager.registerCommand(new DiscordCommand(plugin));
@@ -57,6 +57,11 @@ public class CommandLoader implements Loader {
         commandManager.registerCommand(new WebsiteCommand(plugin));
         commandManager.registerCommand(new WorkbenchCommand(plugin));
         commandManager.registerCommand(new FundamentalsCommand(plugin));
+
+        // Only register these commands if Vault is enabled
+        if (VaultUtils.isVaultAvailable()) {
+            commandManager.registerCommand(new BalanceCommand(plugin));
+        }
     }
 
     private void configureMessage(BukkitMessageKey<? extends MessageContext> key, String path) {

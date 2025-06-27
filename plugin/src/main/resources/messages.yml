@@ -4,6 +4,8 @@ alerts:
   player-leave: "<color:#ff4d73><b>ℹ</b></color> <color:#ff8791><name></color> has left the server."
 errors:
   data-load-fail: "<red>Failed to load player data. Please contact an administrator for help.</red>"
+  no-vault: "<red>Vault is not installed on this server. Economy features are disabled.</red>"
+  no-economy-implementation: "<red>No economy implementation is currently enabled.</red>"
 commands:
   general:
     invalid-argument: "<red>One or more arguments are invalid.</red>"

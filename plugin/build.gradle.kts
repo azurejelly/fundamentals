@@ -25,6 +25,7 @@ dependencies {
     implementation(project(":api"))
     implementation(libs.triumph.cmd)
 
+    compileOnly(libs.vault)
     compileOnly(libs.miniplaceholders)
     compileOnly(libs.paper)
 }
@@ -60,15 +61,12 @@ tasks {
     }
 
     runServer {
-        val ver = findProperty("serverVersion")
-
-        if (ver != null) {
-            minecraftVersion(ver.toString())
-        } else {
-            minecraftVersion("1.21.5")
-        }
-
+        minecraftVersion("1.21.5")
         jvmArgs("-Dcom.mojang.eula.agree=true")
+
+        downloadPlugins {
+            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
+        }
     }
 }
 
@@ -80,15 +78,5 @@ bukkit {
     website = pluginWebsite
     apiVersion = "1.13"
     authors = listOf("azurejelly")
-
-    commands {
-        register("sample") {
-            description = "A sample command!"
-            aliases = listOf("example")
-        }
-        register("minimessage-sample") {
-            description = "A sample command using MiniMessage!"
-            aliases = listOf("mm-sample", "mm-example")
-        }
-    }
+    softDepend = listOf("Vault", "MiniPlaceholders")
 }
