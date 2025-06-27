@@ -24,6 +24,7 @@ repositories {
 dependencies {
     implementation(project(":api"))
     implementation(libs.triumph.cmd)
+    implementation(libs.fastboard)
 
     compileOnly(libs.vault)
     compileOnly(libs.miniplaceholders)
